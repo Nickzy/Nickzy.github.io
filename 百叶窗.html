@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		div{
+			margin: 0 auto;
+			position: relative;
+			overflow: hidden;
+			width: 800px;
+			height: 375px;
+		}
+		div>img{
+			width: 500px;
+			position: absolute;
+			border:1px solid #fff;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<img src="images/pic1.jpg" alt="">
+		<img src="images/pic2.jpg" alt="">
+		<img src="images/pic3.jpg" alt="">
+		<img src="images/pic4.jpg" alt="">
+		<img src="images/pic5.jpg" alt="">
+		<img src="images/pic6.jpg" alt="">
+		<img src="images/pic7.jpg" alt="">
+		<img src="images/pic8.jpg" alt="">
+	</div>
+	<script src="js/jquery-3.0.0.js"></script>
+	<script>
+		var divWid = $("div").width();
+		var imgWid = $("img").width();
+		var len = $("img").length;
+		var ss = divWid - imgWid
+		var left1 =ss/(len -1);
+		var left;
+		$("div>img").each(function(){
+			 left = $(this).index() * divWid / len;
+			$(this).css("left",left)			
+		})
+		// $("img:eq(3)").hover(function(){
+		// 			console.log(left1)
+		// 			$("img").eq(0).animate({"left":left1*0});
+		// 			$("img").eq(1).animate({"left":left1*1});
+		// 			$("img").eq(2).animate({"left":left1*2});
+		// 			$("img").eq(3).animate({"left":left1*3,"width":imgWid});
+		// 			$("img").eq(4).animate({"left":left1*3+imgWid});
+		// 			$("img").eq(5).animate({"left":left1*4+imgWid});
+		// 			$("img").eq(6).animate({"left":left1*5+imgWid});
+		// 			$("img").eq(7).animate({"left":left1*6+imgWid});
+		// })
+		$("div>img").hover(function(){
+					var ind = $(this).index();
+					$("div>img").each(function(){
+						var ind1 = $(this).index();
+						if(ind1<=ind){
+							$(this).stop().animate({"left":ind1*left1,"width":imgWid},500)
+						}else{
+							$(this).stop().animate({"left":left1*(ind1-1)+imgWid},500)
+						}
+					})
+		// 			for(var i = 0;i < len;i++){
+		// 				if(i <= ind){
+		// 					$("div>img").eq(i).stop().animate({"left":i*left1,"width":imgWid},500)
+		// 			}else{
+
+		// 					$("div>img").eq(i).stop().animate({"left":left1*(i-1)+imgWid},500)
+		// 					}
+						
+		// 			}
+		},function(){
+					$("div>img").each(function(){
+			 			left = $(this).index() * divWid / len;
+						$(this).css("left",left)
+					})			
+		
+		})
+		
+	</script>
+</body>
+</html>
