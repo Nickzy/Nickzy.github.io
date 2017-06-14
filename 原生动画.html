@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div{
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			margin-left: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+	<button>按钮</button>
+	<script>
+		document.querySelector("button").onclick = function(){
+			// document.querySelector("div").style.marginLeft = "100px";
+			// var num = 0;
+			// var t = setInterval(function(){
+			// 	num = num + 1;
+			// 	document.querySelector("div").style.marginLeft = num+"px";
+			// 	if(num == 100){
+			// 		clearInterval(t)
+			// 	}
+			// },10)
+			animate(document.querySelector("div"),{"marginLeft":"200px"},function(){
+				animate(document.querySelector("div"),{"marginLeft":"100px"})
+			})
+			
+		}
+		// function animate(obj,style,target){
+		// 	var t = null;
+		// 	console.log([style])
+		// 	var num = parseFloat(window.getComputedStyle(obj)[style]);
+		// 	t = setInterval(function(){
+		// 		if(num == parseFloat(target)){
+		// 			clearInterval(t)
+		// 		}else{
+		// 			num = num + 1;
+		// 			obj.style[style] = num+"px";
+		// 		}
+				
+		// 	},10)
+		// }
+		function animate(obj,styleObj,callback){
+			var t = null;
+			for(var i in styleObj){
+				var style1 = i
+			}
+			var num = parseFloat(window.getComputedStyle(obj)[style1]);
+			t = setInterval(function(){
+				if(num == parseFloat(styleObj[style1])){
+					clearInterval(t);
+					if(callback){
+						callback();
+					}
+					
+				}else{
+					if(num < parseFloat(styleObj[style1])){
+						num = num + 1;
+					}else{
+						num-=1
+					}
+					obj.style[style1] = num+"px";
+				}
+				
+			},10)
+		}
+		// var obj = {
+			
+			
+		// }
+		// for(var i in obj){
+		// 		console.log([i])
+		// 	}
+	</script>
+</body>
+</html>
